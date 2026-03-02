@@ -3,7 +3,7 @@
 :root {
   --text-color: #2a2a2a;
   --bg-color: #ffffff;
-  --footer-bg: #333333;
+  --footer-bg: #2a2a2a;
   --accent-color: #c8a951;
   --max-width: 980px;
   --font-body: 'Jost', sans-serif;
@@ -46,10 +46,10 @@ a {
 }
 
 .site-header h1 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-heading);
   font-size: 38px;
   font-weight: 700;
-  letter-spacing: 3.8px;
+  letter-spacing: normal;
   color: var(--text-color);
 }
 
@@ -147,9 +147,17 @@ a {
   flex: 1;
 }
 
-.about-text h2 {
+.about-name {
   font-family: var(--font-heading);
   font-size: 20px;
+  font-weight: 400;
+  letter-spacing: normal;
+  margin-bottom: 10px;
+}
+
+.about-text h2 {
+  font-family: var(--font-body);
+  font-size: 16px;
   font-weight: 400;
   margin-bottom: 20px;
 }
@@ -165,8 +173,8 @@ a {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 40px;
-  border: 2px solid var(--text-color);
-  border-radius: 30px;
+  border: 2px solid #323232;
+  border-radius: 60px;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
@@ -183,16 +191,19 @@ a {
   display: flex;
   gap: 50px;
   padding: 30px 0;
+  justify-content: center;
 }
 
 .contact-info {
-  flex: 0 0 35%;
+  flex: 0 0 auto;
+  min-width: 250px;
 }
 
 .contact-info h2 {
   font-family: var(--font-heading);
   font-size: 20px;
   font-weight: 400;
+  letter-spacing: normal;
   margin-bottom: 30px;
 }
 
@@ -203,7 +214,7 @@ a {
 }
 
 .contact-form {
-  flex: 1;
+  flex: 0 0 300px;
 }
 
 .contact-form label {
@@ -217,7 +228,7 @@ a {
 .contact-form textarea {
   width: 100%;
   padding: 8px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--text-color);
   font-family: var(--font-body);
   font-size: 14px;
   margin-bottom: 20px;
@@ -264,6 +275,7 @@ a {
   font-family: var(--font-heading);
   font-size: 20px;
   font-weight: 400;
+  letter-spacing: normal;
 }
 
 .blog-card {
@@ -281,7 +293,7 @@ a {
 
 .blog-card-image img {
   width: 100%;
-  height: 280px;
+  height: 340px;
   object-fit: cover;
   transition: transform 0.3s;
 }
@@ -351,6 +363,11 @@ a {
 }
 
 /* Single blog post */
+article {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
 .post-header {
   margin-bottom: 30px;
 }
@@ -367,28 +384,43 @@ a {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 12px;
+  font-size: 14px;
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.post-updated {
+  font-size: 14px;
   color: var(--text-color);
   margin-bottom: 20px;
 }
 
 .post-body {
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 27px;
 }
 
 .post-body p {
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  line-height: 27px;
+}
+
+.post-body span[style*="font-size"] {
+  line-height: 27px;
+}
+
+.post-body p:has(> em:first-child) {
+  line-height: 21.6px;
 }
 
 .post-body img {
-  margin: 20px 0;
+  margin: 0 0 27px 0;
   max-width: 100%;
 }
 
 .post-body video {
   width: 100%;
-  margin: 20px 0;
+  margin: 0 0 27px 0;
 }
 
 .video-container {
@@ -400,14 +432,15 @@ a {
   background: #000;
 }
 
-.post-body ul {
-  margin: 10px 0 20px 20px;
-  padding-left: 20px;
+.post-body ul,
+.post-body ol {
+  margin: 0;
+  padding-left: 36px;
 }
 
 .post-body li {
-  margin-bottom: 6px;
-  line-height: 1.5;
+  margin-bottom: 0;
+  line-height: 27px;
 }
 
 .post-body h2,
@@ -417,11 +450,44 @@ a {
 }
 
 .post-body h2 {
-  font-size: 24px;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 35px;
 }
 
 .post-body h3 {
   font-size: 20px;
+}
+
+/* Post actions (share/like) */
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.post-share {
+  display: flex;
+  gap: 8px;
+}
+
+.post-share button,
+.post-like-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  color: var(--text-color);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.post-share button:hover,
+.post-like-btn:hover {
+  opacity: 1;
 }
 
 /* Recent posts sidebar */
@@ -491,7 +557,7 @@ a {
 @media (max-width: 768px) {
   .site-header h1 {
     font-size: 28px;
-    letter-spacing: 3px;
+    letter-spacing: normal;
   }
 
   .about-section {
@@ -509,6 +575,11 @@ a {
 
   .contact-info {
     flex: none;
+  }
+
+  .contact-form {
+    flex: none;
+    width: 100%;
   }
 
   .blog-card {
